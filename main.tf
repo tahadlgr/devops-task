@@ -5,6 +5,8 @@ locals {
   empty_sub_environments   = ["-"]
 }
 
+# To add an empty sub environment, name must be added to empty sub environments and other arbitrary sub environment list in same time.
+
 module "dev" {
   source = "./environments"
 
