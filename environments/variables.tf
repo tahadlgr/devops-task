@@ -14,19 +14,11 @@ variable "mysql_size" {
   type = string
 }
 
-variable "alternative_mysql_size" {
-  type = string
-}
-
 variable "nosql_count" {
   type = number
 }
 
 variable "nosql_size" {
-  type = string
-}
-
-variable "alternative_nosql_size" {
   type = string
 }
 
@@ -38,26 +30,22 @@ variable "instance_size" {
   type = string
 }
 
-variable "alternative_instance_size" {
-  type = string
-}
-
 variable "container_count" {
   type = number
 }
 
-variable "container_mem_svc1" {
+variable "svc1_container_mem" {
   type = number
 }
 
-variable "container_mem_svc2" {
+variable "svc2_container_mem" {
+  type = number
+}
+
+variable "k8s_cluster_count" {
   type = number
 }
 
 variable "k8s_cluster_size" {
-  type = string
-}
-
-variable "alternative_k8s_cluster_size" {
   type = string
 }

@@ -1,225 +1,108 @@
-variable "dev_mysql_count" {
-  type    = number
-  default = 1
-}
+variable "main" {
+  type = list(object({
+    environment        = string
+    sub_environment    = optional(string, null)
+    mysql_count        = optional(number, 0)
+    mysql_size         = optional(string, null)
+    nosql_count        = optional(number, 0)
+    nosql_size         = optional(string, null)
+    instance_count     = optional(number, 0)
+    instance_size      = optional(string, null)
+    container_count    = optional(number, 0)
+    svc1_container_mem = optional(number, 0)
+    svc2_container_mem = optional(number, 0)
+    k8s_cluster_count  = optional(number, 0)
+    k8s_cluster_size   = optional(string, null)
+  }))
 
-variable "dev_mysql_size" {
-  type    = string
-  default = "small"
-}
-
-variable "dev_alternative_mysql_size" {
-  type    = string
-  default = "xsmall"
-}
-
-variable "staging_mysql_count" {
-  type    = number
-  default = 1
-}
-
-variable "staging_mysql_size" {
-  type    = string
-  default = "large"
-}
-
-variable "staging_alternative_mysql_size" {
-  type    = string
-  default = "medium"
-}
-
-variable "prod_mysql_count" {
-  type    = number
-  default = 2
-}
-
-variable "prod_mysql_size" {
-  type    = string
-  default = "xlarge"
-}
-
-variable "prod_alternative_mysql_size" {
-  type    = string
-  default = "2xlarge"
-}
-
-###
-
-variable "dev_nosql_count" {
-  type    = number
-  default = 1
-}
-
-variable "dev_nosql_size" {
-  type    = string
-  default = "small"
-}
-
-variable "dev_alternative_nosql_size" {
-  type    = string
-  default = "xsmall"
-}
-
-variable "staging_nosql_count" {
-  type    = number
-  default = 1
-}
-
-variable "staging_nosql_size" {
-  type    = string
-  default = "large"
-}
-
-variable "staging_alternative_nosql_size" {
-  type    = string
-  default = "medium"
-}
-
-variable "prod_nosql_count" {
-  type    = number
-  default = 2
-}
-
-variable "prod_nosql_size" {
-  type    = string
-  default = "xlarge"
-}
-
-variable "prod_alternative_nosql_size" {
-  type    = string
-  default = "2xlarge"
-}
-
-###
-
-variable "dev_instance_count" {
-  type    = number
-  default = 1
-}
-
-variable "dev_instance_size" {
-  type    = string
-  default = "small"
-}
-
-variable "dev_alternative_instance_size" {
-  type    = string
-  default = "xsmall"
-}
-
-variable "staging_instance_count" {
-  type    = number
-  default = 2
-}
-
-variable "staging_alternative_instance_count" {
-  type    = number
-  default = 3
-}
-
-variable "staging_instance_size" {
-  type    = string
-  default = "large"
-}
-
-variable "staging_alternative_instance_size" {
-  type    = string
-  default = "medium"
-}
-
-variable "prod_instance_count" {
-  type    = number
-  default = 3
-}
-
-variable "prod_instance_size" {
-  type    = string
-  default = "xlarge"
-}
-
-variable "prod_alternative_instance_size" {
-  type    = string
-  default = "2xlarge"
-}
-
-###
-
-variable "dev_k8s_container_count" {
-  type    = number
-  default = 2
-}
-
-variable "dev_svc1_container_mem" {
-  type    = number
-  default = 256
-}
-
-variable "dev_svc2_container_mem" {
-  type    = number
-  default = 512
-}
-
-variable "dev_k8s_cluster_size" {
-  type    = string
-  default = "small"
-}
-
-variable "dev_alternative_k8s_cluster_size" {
-  type    = string
-  default = "xsmall"
-}
-
-variable "staging_k8s_container_count" {
-  type    = number
-  default = 4
-}
-
-variable "staging_svc1_container_mem" {
-  type    = number
-  default = 2048
-}
-
-variable "staging_svc2_container_mem" {
-  type    = number
-  default = 4096
-}
-
-variable "staging_alternative_k8s_container_count" {
-  type    = number
-  default = 6
-}
-
-variable "staging_k8s_cluster_size" {
-  type    = string
-  default = "large"
-}
-
-variable "staging_alternative_k8s_cluster_size" {
-  type    = string
-  default = "medium"
-}
-
-variable "prod_k8s_container_count" {
-  type    = number
-  default = 6
-}
-
-variable "prod_svc1_container_mem" {
-  type    = number
-  default = 2048
-}
-
-variable "prod_svc2_container_mem" {
-  type    = number
-  default = 4096
-}
-
-variable "prod_k8s_cluster_size" {
-  type    = string
-  default = "xlarge"
-}
-
-variable "prod_alternative_k8s_cluster_size" {
-  type    = string
-  default = "2xlarge"
+  default = [
+    {
+      environment        = "dev"
+      sub_environment    = "natasha"
+      mysql_count        = 1
+      mysql_size         = "xsmall"
+      nosql_count        = 1
+      nosql_size         = "xsmall"
+      instance_count     = 1
+      instance_size      = "xsmall"
+      container_count    = 2
+      svc1_container_mem = 256
+      svc2_container_mem = 256
+      k8s_cluster_count  = 1
+      k8s_cluster_size   = "xsmall"
+    },
+    {
+      environment        = "dev"
+      sub_environment    = "clint"
+      mysql_count        = 1
+      mysql_size         = "xsmall"
+      nosql_count        = 1
+      nosql_size         = "xsmall"
+      instance_count     = 1
+      instance_size      = "xsmall"
+      container_count    = 2
+      svc1_container_mem = 256
+      svc2_container_mem = 256
+      k8s_cluster_count  = 1
+      k8s_cluster_size   = "xsmall"
+    },
+    {
+      environment        = "dev"
+      mysql_count        = 1
+      mysql_size         = "small"
+      nosql_count        = 1
+      nosql_size         = "small"
+      instance_count     = 1
+      instance_size      = "small"
+      container_count    = 2
+      svc1_container_mem = 256
+      svc2_container_mem = 256
+      k8s_cluster_count  = 1
+      k8s_cluster_size   = "small"
+    },
+    {
+      environment        = "staging"
+      sub_environment    = "integration"
+      mysql_count        = 1
+      mysql_size         = "large"
+      nosql_count        = 1
+      nosql_size         = "large"
+      instance_count     = 2
+      instance_size      = "large"
+      container_count    = 4
+      svc1_container_mem = 2048
+      svc2_container_mem = 4096
+      k8s_cluster_count  = 1
+      k8s_cluster_size   = "large"
+    },
+    {
+      environment        = "staging"
+      sub_environment    = "performance"
+      mysql_count        = 1
+      mysql_size         = "large"
+      nosql_count        = 1
+      nosql_size         = "large"
+      instance_count     = 3
+      instance_size      = "large"
+      container_count    = 6
+      svc1_container_mem = 2048
+      svc2_container_mem = 4096
+      k8s_cluster_count  = 1
+      k8s_cluster_size   = "xlarge"
+    },
+    {
+      environment        = "prod"
+      mysql_count        = 2
+      mysql_size         = "xlarge"
+      nosql_count        = 2
+      nosql_size         = "xlarge"
+      instance_count     = 3
+      instance_size      = "xlarge"
+      container_count    = 6
+      svc1_container_mem = 2048
+      svc2_container_mem = 4096
+      k8s_cluster_count  = 1
+      k8s_cluster_size   = "xlarge"
+    }
+  ]
 }
