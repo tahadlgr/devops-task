@@ -43,7 +43,7 @@ resource "terraform_data" "k8s_cluster" {
   input = {
     environment     = var.environment
     sub_environment = var.sub_environment
-    name            = "kcls"
+    name            = "${var.sub_environment}" != null ? "${var.environment}-${var.sub_environment}-k8s-cluster-kcls-${format("%02d", count.index % (var.k8s_cluster_count / 2) + 1)}" : "${var.environment}-cluster-kcls-${format("%02d", count.index % (var.k8s_cluster_count / 2) + 1)}"
     size            = var.k8s_cluster_size
     type            = "k8s_cluster"
   }
@@ -59,6 +59,6 @@ resource "terraform_data" "container" {
     size            = var.k8s_cluster_size
     type            = "container"
     mem             = "svc${count.index % 2 + 1}" == "svc1" ? var.svc1_container_mem : var.svc2_container_mem
-    name            = "${var.sub_environment}" != null ? "${var.environment}-${var.sub_environment}-kcls-container-svc${count.index % 2 + 1}-${format("%02d", count.index % (var.container_count / 2) + 1)}" : "${var.environment}-kcls-container-svc${count.index % 2 + 1}-${format("%02d", count.index % (var.container_count / 2) + 1)}"
+    name            = "${var.sub_environment}" != null ? "${var.environment}-${var.sub_environment}-kcls-container-svc${count.index % 2 + 1}-${format("%02d", ceil((var.container_count - count.index) / 2))}" : "${var.environment}-kcls-container-svc${count.index % 2 + 1}-${format("%02d", ceil((var.container_count - count.index) / 2))}"
   }
 }
